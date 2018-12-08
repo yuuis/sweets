@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  resources :products, only: [:index]
+  scope :api do
+    scope :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+      resources :products, only: [:index]
+    end
+  end
 end

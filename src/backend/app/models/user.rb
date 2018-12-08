@@ -1,4 +1,7 @@
-class User < ApplicationRecord
-  has_many :idm, dependent: :destroy
-  belongs_to :role
+# frozen_string_literal: true
+
+class User < ActiveRecord::Base
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  include DeviseTokenAuth::Concerns::User
 end
