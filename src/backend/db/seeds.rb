@@ -13,5 +13,5 @@ Product.create(name: "アイス", price: 100, image: "https://2.bp.blogspot.com/
 Purchase.create(user_id: 1, paid: false)
 Purchase.create(user_id: 1, paid: true)
 
-PurchasedProducts.create(purchase_id: 1, quantity: 2, product_id: 1)
-PurchasedProducts.create(purchase_id: 2, quantity: 1, product_id: 2)
+PurchasedProduct.create(purchase_id: 1, quantity: 2, product_id: 1)
+PurchasedProduct.create(purchase_id: 2, quantity: 1, product_id: 2)
