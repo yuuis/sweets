@@ -13,6 +13,9 @@
 </template>
 
 <script>
+if (process.browser) {
+  require("nuxt-onsenui-module");
+}
 import AppLogo from "~/components/AppLogo.vue";
 
 export default {
