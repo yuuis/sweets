@@ -1,0 +1,2 @@
+class Idm < ApplicationRecord
+end
