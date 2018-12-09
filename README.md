@@ -9,7 +9,8 @@ Sweets is payment platform for tagoken
 ## Requirements
 
  - Backend
-    - Python3
+    - rails: 5.2.2
+    - ruby: 2.5.1
 
 ## Docs
 
