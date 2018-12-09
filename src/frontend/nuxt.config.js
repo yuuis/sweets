@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
   srcDir: 'app',
 
   /*
@@ -35,7 +35,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/element-ui'
+    '~/plugins/element-ui',
   ],
 
   /*
@@ -43,14 +43,17 @@ module.exports = {
   */
   modules: [,
     // Doc: https://bootstrap-vue.js.org/docs/
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'nuxt-onsenui-module'
   ],
 
   /*
   ** Build configuration
   */
   build: {
-    vendor: ['element-ui'],
+    vendor: [
+      'element-ui',
+    ],
     /*
     ** You can extend webpack config here
     */
