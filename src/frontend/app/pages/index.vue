@@ -4,20 +4,51 @@
       <div class="center">商品一覧</div>
     </v-ons-toolbar>
     <v-ons-search-input placeholder="Search something" v-model="search_str"></v-ons-search-input>
-    <el-row :gutter="20">
-      <el-col :span="6" v-for="product in search" :key="product.id">
-        <products :product="product"/>
+    <el-row>
+      <el-col :span="5" v-for="product in search" :key="product.id" :offset="0">
+        <products ref="prod" :product="product" @addCart="addCart"/>
       </el-col>
     </el-row>
-    <p style="text-align: center">
-      <v-ons-button @click="$ons.notification.alert('Hello World!')">Click me!</v-ons-button>
-    </p>
+    <transition name="el-zoom-in-bottom">
+      <total-account
+        :isShowTotal="isShowTotal"
+        :items="items"
+        :totalQuentity="totalQuentity"
+        :totalPrice="totalPrice"
+        @pushTPay="pushTPay"
+        @showTotal="showTotal"
+        @removeCart="removeCart"
+      />
+    </transition>
+    <div class="tabber" :class="{visible: isShowSubtotal}">
+      <div class="contents tabber-contents">
+        <el-row class="middle-center">
+          <el-col :span="16">
+            <el-row class="quentity">
+              <el-col :span="12">お買い上げ点数</el-col>
+              <el-col :span="12">{{ totalQuentity }}点</el-col>
+            </el-row>
+            <el-row class="price">
+              <el-col :span="12">小計</el-col>
+              <el-col :span="12">¥{{ totalPrice }}</el-col>
+            </el-row>
+          </el-col>
+          <el-col :span="4">
+            <el-button class="tab-button" type="primary" @click="showTotal(true)" round>Purchase</el-button>
+          </el-col>
+          <el-col :span="4">
+            <el-button class="tab-button" type="info" @click="resetCart()" round>Reset</el-button>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
   </v-ons-page>
 </template>
 
 <script>
-import AppLogo from "~/components/AppLogo.vue";
 import Products from "~/components/Products.vue";
+import PurchasePage from "./purchase.vue";
+import TotalAccount from "~/components/TotalAccount.vue";
 
 export default {
   asyncData() {
@@ -25,26 +56,101 @@ export default {
       products: [
         {
           id: 1,
-          name: "いしグロ",
+          name: "31アイス",
           image_path: require("~/assets/images/R0001619.jpg"),
-          price: "1"
+          price: "100"
         },
         {
           id: 2,
-          name: "いしグロ2",
+          name: "31アイス2",
           image_path: require("~/assets/images/R0001619.jpg"),
-          price: "10"
+          price: "100"
+        },
+        {
+          id: 3,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 4,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 5,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 6,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+
+        {
+          id: 7,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 8,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 9,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 10,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 11,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 12,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 13,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
+        },
+        {
+          id: 14,
+          name: "31アイス2",
+          image_path: require("~/assets/images/R0001619.jpg"),
+          price: "100"
         }
       ],
       cart: [],
-      search_str: ""
+      search_str: "",
+      isShowTotal: false
     };
   },
   components: {
-    AppLogo,
-    Products
+    Products,
+    TotalAccount
   },
   methods: {
+    // 商品をカートに追加する
     addCart(product) {
       let isExist = false;
       this.cart.some(item => {
@@ -55,27 +161,119 @@ export default {
         }
       });
       if (!isExist) this.cart.push(product);
+    },
+    pushTPay() {
+      this.$emit("push-page", PurchasePage);
+    },
+    showTotal(bool) {
+      if (bool == undefined) bool = this.isShowSubtotal;
+      this.isShowTotal = bool;
+    },
+    removeCart(id) {
+      this.cart.some((item, index) => {
+        if (item.id == id) {
+          this.cart.splice(index, 1);
+          this.showTotal();
+          return true;
+        }
+      });
+    },
+    resetCart(id) {
+      this.cart = [];
+      this.$refs.prod.forEach((_, index) => {
+        this.$refs.prod[index].resetCart();
+      });
     }
   },
   async fetch({ store }) {},
-  created() {
-    this._products = this.products.concat();
-  },
   computed: {
     search: function() {
+      // 商品のリアルタイム検索
       var products = [];
       if (!this.search_str) return this.products.concat();
       this.products.forEach(product => {
         if (product.name.indexOf(this.search_str) != -1) products.push(product);
       });
       return products;
+    },
+    isShowSubtotal() {
+      return this.cart.length > 0;
+    },
+    items() {
+      var items = [];
+      this.products.forEach(product => {
+        this.cart.some(_item => {
+          if (_item.id == product.id) {
+            items.push({
+              quentity: _item.quentity,
+              ...product
+            });
+          }
+        });
+      });
+      return items;
+    },
+    totalQuentity() {
+      let quentity = 0;
+      this.items.forEach(item => {
+        quentity += item.quentity;
+      });
+      return quentity;
+    },
+    totalPrice() {
+      let price = 0;
+      this.items.forEach(item => {
+        price += item.price * item.quentity;
+      });
+      return price.toLocaleString();
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.contents {
+  width: 80%;
+  &.tabber-contents {
+    margin: 0 auto;
+    .el-row {
+      margin-top: 8px;
+      .quentity {
+        color: #777;
+      }
+      .tab-button {
+        margin-top: 12px;
+        width: 95%;
+      }
+    }
+  }
+}
+.el-col-offset-0 {
+  margin: 2%;
+}
 ons-search-input {
   min-width: 95%;
+}
+.tabber {
+  font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial",
+    "Lucida Grande", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  display: none;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  height: 80px;
+  &.visible {
+    display: flex;
+  }
 }
 </style>

@@ -1,30 +1,50 @@
 <template>
-  <v-ons-card>
-    <img :src="product.image_path" alt="Onsen UI" style="width: 100%">
-    <div class="title">{{ product.name }}</div>
-    <div class="title">¥ {{ product.price }}</div>
-    <div class="content">
-      <el-input-number
-        v-model="quentiry"
-        @click="addCart({id:product.id, quentiry:quentiry})"
-        :min="0"
-        :max="10"
-      ></el-input-number>
+  <el-card :body-style="{ padding: '0px' }">
+    <div
+      class="product-card"
+      @click="add(product.id)"
+      :class="{selected: style.isSelected}"
+      :align="styles"
+    >
+      <img :src="product.image_path" class="image">
+      <div style="padding: 14px;">
+        <span>{{ product.name }}</span>
+        <div class="bottom clearfix">
+          <time class="price">¥ {{ product.price }}</time>
+        </div>
+      </div>
     </div>
-  </v-ons-card>
+  </el-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      quentiry: 0
+      quentity: 0,
+      style: {
+        isSelected: false
+      }
     };
   },
   props: ["product"],
   methods: {
+    add(id) {
+      this.quentity++;
+      this.style.isSelected = true;
+      this.addCart({ id: id, quentity: this.quentity });
+    },
     addCart(product) {
       this.$emit("addCart", product);
+    },
+    resetCart() {
+      this.quentity = 0;
+      this.style.isSelected = false;
+    }
+  },
+  computed: {
+    styles() {
+      return this.quentity > 0 ? this.quentity : "";
     }
   }
 };
@@ -37,5 +57,59 @@ export default {
   .el-input-number__increase {
     width: 80px;
   }
+}
+</style>
+
+<style lang="scss" scoped>
+.selected {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 0 3px #81b8e3 inset;
+  }
+  &::before {
+    content: attr(align);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    padding: 15px;
+    font-size: 25px;
+    border-radius: 10px 0 0 0;
+    background-color: #4b9ad8;
+  }
+}
+.product-card {
+  .price {
+    font-size: 13px;
+    color: #999;
+  }
+  .image {
+    width: 100%;
+    display: block;
+  }
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+
+  .clearfix:after {
+    clear: both;
+  }
+}
+
+.button {
+  padding: 0;
+  float: right;
 }
 </style>
