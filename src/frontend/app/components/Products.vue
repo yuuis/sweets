@@ -3,7 +3,7 @@
     <div
       class="product-card"
       @click="add(product.id)"
-      :class="{selected: style.isSelected}"
+      :class="{selected: isSelected}"
       :align="styles"
     >
       <img :src="product.image_path" class="image">
@@ -21,17 +21,13 @@
 export default {
   data() {
     return {
-      quentity: 0,
-      style: {
-        isSelected: false
-      }
+      quentity: 0
     };
   },
   props: ["product"],
   methods: {
     add(id) {
       this.quentity++;
-      this.style.isSelected = true;
       this.addCart({ id: id, quentity: this.quentity });
     },
     addCart(product) {
@@ -39,12 +35,14 @@ export default {
     },
     resetCart() {
       this.quentity = 0;
-      this.style.isSelected = false;
     }
   },
   computed: {
     styles() {
       return this.quentity > 0 ? this.quentity : "";
+    },
+    isSelected() {
+      return this.quentity > 0;
     }
   }
 };

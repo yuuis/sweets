@@ -167,6 +167,12 @@ export default {
       this.isShowTotal = bool;
     },
     removeCart(id) {
+      this.$refs.prod.some((item, index) => {
+        if (item.product.id == id) {
+          this.$refs.prod[index].quentity = 0;
+          return true;
+        }
+      });
       this.cart.some((item, index) => {
         if (item.id == id) {
           this.cart.splice(index, 1);
@@ -276,5 +282,11 @@ ons-search-input {
   &.visible {
     display: flex;
   }
+}
+</style>
+
+<style lang="scss">
+.page__background {
+  background: url(~assets/images/background.png);
 }
 </style>
