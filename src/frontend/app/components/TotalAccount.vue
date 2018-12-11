@@ -38,7 +38,7 @@
         <el-col class="right" :span="4">{{ totalQuentity }}点</el-col>
       </el-row>
       <el-row class="price">
-        <el-col :span="20">小計</el-col>
+        <el-col :span="20">合計金額</el-col>
         <el-col class="right" :span="4">¥{{ totalPrice }}</el-col>
       </el-row>
     </div>
@@ -61,13 +61,17 @@
       </div>
     </transition>
     <transition name="sequence">
-      <t-pay v-if="paymethod=='tpay'" @reSelect="reSelect"></t-pay>
+      <t-pay v-if="paymethod=='tpay'" @pushSuccess="pushSuccess" @reSelect="reSelect"></t-pay>
+    </transition>
+    <transition name="sequence">
+      <q-r-pay v-if="paymethod=='qrcode'" @pushSuccess="pushSuccess" @reSelect="reSelect"></q-r-pay>
     </transition>
   </v-ons-dialog>
 </template>
 
 <script>
 import TPay from "~/components/TPaySequence";
+import QRPay from "~/components/QRPaySequence";
 export default {
   data() {
     return {
@@ -89,10 +93,14 @@ export default {
     },
     reSelect() {
       this.paymethod = undefined;
+    },
+    pushSuccess() {
+      this.$emit("pushSuccess");
     }
   },
   components: {
-    TPay
+    TPay,
+    QRPay
   }
 };
 </script>

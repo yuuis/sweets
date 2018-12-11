@@ -15,7 +15,7 @@
         :items="items"
         :totalQuentity="totalQuentity"
         :totalPrice="totalPrice"
-        @pushTPay="pushTPay"
+        @pushSuccess="pushSuccess"
         @showTotal="showTotal"
         @removeCart="removeCart"
       />
@@ -47,8 +47,8 @@
 
 <script>
 import Products from "~/components/Products.vue";
-import PurchasePage from "./purchase.vue";
 import TotalAccount from "~/components/TotalAccount.vue";
+import DonePage from "~/pages/done";
 
 export default {
   asyncData() {
@@ -162,9 +162,6 @@ export default {
       });
       if (!isExist) this.cart.push(product);
     },
-    pushTPay() {
-      this.$emit("push-page", PurchasePage);
-    },
     showTotal(bool) {
       if (bool == undefined) bool = this.isShowSubtotal;
       this.isShowTotal = bool;
@@ -183,6 +180,10 @@ export default {
       this.$refs.prod.forEach((_, index) => {
         this.$refs.prod[index].resetCart();
       });
+    },
+    pushSuccess() {
+      this.showTotal(false);
+      this.$emit("push-page", DonePage);
     }
   },
   async fetch({ store }) {},

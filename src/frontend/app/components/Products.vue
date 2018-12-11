@@ -75,12 +75,12 @@ export default {
   &::before {
     content: attr(align);
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
     color: white;
-    padding: 15px;
+    padding: 10px 20px;
     font-size: 25px;
-    border-radius: 10px 0 0 0;
+    border-radius: 0 0 0 50%;
     background-color: #4b9ad8;
   }
 }

@@ -36,6 +36,8 @@ module.exports = {
   */
   plugins: [
     '~/plugins/element-ui',
+    '~/plugins/sweet-modal',
+    '~/plugins/vue-qriously'
   ],
 
   /*
@@ -44,7 +46,7 @@ module.exports = {
   modules: [,
     // Doc: https://bootstrap-vue.js.org/docs/
     '@nuxtjs/dotenv',
-    'nuxt-onsenui-module'
+    'nuxt-onsenui-module',
   ],
 
   /*

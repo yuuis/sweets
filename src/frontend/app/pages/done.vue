@@ -4,7 +4,19 @@
       <div class="left"></div>
       <div class="center">完了</div>
     </v-ons-toolbar>
-    <div class="main"></div>
+    <sweet-modal
+      ref="modal"
+      width="80%"
+      overlay-theme="dark"
+      :blocking="true"
+      :hide-close-button="true"
+      icon="success"
+    >
+      <div class="main">
+        <p>購入が完了しました。</p>
+        <el-button type="primary" @click="reload" round>決済を終了する</el-button>
+      </div>
+    </sweet-modal>
   </v-ons-page>
 </template>
 
@@ -22,7 +34,13 @@ export default {
         text: "Loading",
         lock: false
       });
+    },
+    reload() {
+      location.reload();
     }
+  },
+  mounted() {
+    this.$refs.modal.open();
   }
 };
 </script>
@@ -44,48 +62,12 @@ export default {
 <style lang="scss" scoped>
 .main {
   width: 100%;
-  .tutorial {
-    width: 80%;
-    margin-top: 10vh;
-    display: inline-block;
+  font-size: 30px;
+  p {
+    margin: 20px auto;
   }
-
-  .animation {
-    text-align: center;
-    .handbox {
-      .hand {
-        width: 40%;
-        margin-left: 20%;
-        animation-name: felicaHandAnimation;
-        animation-duration: 1s;
-        animation-direction: alternate;
-        animation-iteration-count: infinite;
-      }
-    }
-    .reader {
-      width: 30%;
-      margin-right: 10%;
-      margin-top: -250px;
-    }
-  }
-  .warning {
-    text-align: center;
-    margin: 50px;
-    font-size: 30px;
-  }
-}
-@keyframes felicaHandAnimation {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(0deg);
-  }
-  90% {
-    transform: rotate(-40deg);
-  }
-  100% {
-    transform: rotate(-40deg);
+  button {
+    font-size: 20px;
   }
 }
 </style>

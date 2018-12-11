@@ -1,13 +1,10 @@
 <template>
   <div class="tutorial">
-    <div class="animation">
-      <div class="handbox">
-        <img class="hand" :class="{pause: isPause}" src="~/assets/images/felica_hand.svg" alt>
-      </div>
-      <img class="reader" src="~/assets/images/felica.png" alt>
-    </div>
+    <qriously :value="testURL" :size="200"/>
     <div class="warning">
-      <p>リーダーに、Felicaをかざしてください</p>
+      <p>QRコードを読み取り
+        <br>ブラウザを起動してください。
+      </p>
       <el-button @click="reSelect" type="text">別の支払方法を選択する</el-button>
       <el-button @click="recognization" type="text">決済テスト</el-button>
     </div>
@@ -18,6 +15,7 @@
 export default {
   data() {
     return {
+      testURL: "http://www.google.com",
       isPause: false
     };
   },
@@ -45,48 +43,13 @@ export default {
 .tutorial {
   width: 100%;
   display: inline-block;
+  text-align: center;
 }
 
-.animation {
-  text-align: center;
-  .handbox {
-    .hand {
-      max-width: 50vh;
-      margin-left: 25vh;
-      animation-name: felicaHandAnimation;
-      animation-duration: 1.5s;
-      animation-direction: alternate;
-      animation-iteration-count: infinite;
-      &.pause {
-        animation-play-state: paused;
-      }
-    }
-  }
-  .reader {
-    max-width: 45vh;
-    margin-right: 25vh;
-    margin-top: -200px;
-  }
-}
 .warning {
   text-align: center;
   margin: 2vh 50px;
   font-size: 30px;
-}
-
-@keyframes felicaHandAnimation {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(0deg);
-  }
-  90% {
-    transform: rotate(-40deg);
-  }
-  100% {
-    transform: rotate(-40deg);
-  }
 }
 </style>
 
