@@ -56,88 +56,76 @@ export default {
       products: [
         {
           id: 1,
-          name: "31アイス",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "カップ麺",
+          image_path: require("~/assets/images/Product001.png"),
+          price: 130
         },
         {
           id: 2,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "ペットボトル飲料",
+          image_path: require("~/assets/images/Product002.png"),
+          price: 100
         },
         {
           id: 3,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "缶ジュース",
+          image_path: require("~/assets/images/Product003.png"),
+          price: 50
         },
         {
           id: 4,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "アイス",
+          image_path: require("~/assets/images/Product004.png"),
+          price: 100
         },
         {
           id: 5,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "焼きおにぎり",
+          image_path: require("~/assets/images/Product005.png"),
+          price: 30
         },
         {
           id: 6,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "チャーハン1/2",
+          image_path: require("~/assets/images/Product006.png"),
+          price: 80
         },
 
         {
           id: 7,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "ゼリー",
+          image_path: require("~/assets/images/Product007.png"),
+          price: 30
         },
         {
           id: 8,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "今川焼き",
+          image_path: require("~/assets/images/Product008.png"),
+          price: 60
         },
         {
           id: 9,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "ポッキー・プリッツ小袋",
+          image_path: require("~/assets/images/Product009.png"),
+          price: 30
         },
         {
           id: 10,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "スナック・チョコレート",
+          image_path: require("~/assets/images/Product010.png"),
+          price: 100
         },
         {
           id: 11,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "柿の種・おかき",
+          image_path: require("~/assets/images/Product011.png"),
+          price: 50
         },
         {
           id: 12,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
-        },
-        {
-          id: 13,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
-        },
-        {
-          id: 14,
-          name: "31アイス2",
-          image_path: require("~/assets/images/R0001619.jpg"),
-          price: "100"
+          name: "ラムネ菓子",
+          image_path: require("~/assets/images/Product012.png"),
+          price: 70
         }
       ],
       cart: [],
