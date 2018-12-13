@@ -12,15 +12,11 @@ services:
         tty: true
 
     db:
-        # 既存イメージを使い、buildは使わない
         image: mysql:5.7.22
-        # volumesでホスト側にデータを残す
         volumes:
               - ./db/mysql_data:/var/lib/mysql
-        # ポートを変更して競合しないように
         ports:
              - "3306:3306"
-        # 環境変数を設定
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_USER: test
