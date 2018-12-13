@@ -1,13 +1,45 @@
 version: '3'
 services:
+    
+    frontend:  
+        build: "./docker/vuejs"
+        ports:
+            - 13000:13000
+        command: npm run dev
+        volumes:
+            - "./src/frontend:/app"
+        stdin_open: true
+        tty: true
+
     db:
+        # 既存イメージを使い、buildは使わない
         image: mysql:5.7.22
+        # volumesでホスト側にデータを残す
         volumes:
               - ./db/mysql_data:/var/lib/mysql
+        # ポートを変更して競合しないように
         ports:
              - "3306:3306"
+        # 環境変数を設定
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_USER: test
             MYSQL_PASSWORD: test
             MYSQL_DATABASE: test
+
+    backend:
+        build: 
+            context: ./src/backend/
+            dockerfile: ../../docker/rails/Dockerfile
+
+        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        environment:
+          DB_HOST_NAME: db
+        volumes:
+            - "./src/backend:/rails"
+        ports:
+            - "3000:3000"
+        depends_on:
+            - db
+        links:
+            - db
