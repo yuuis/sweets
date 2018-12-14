@@ -8,7 +8,7 @@ class PurchasesController < ApplicationController
     end
 
     if purchase.save
-      render json: purchase.purchased_product, status: :created
+      render json: purchase, status: :created
       # felica readerをactiveにする処理
       # purchase_idも一緒に送る
     else
