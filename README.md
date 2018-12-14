@@ -26,6 +26,6 @@ Sweets is payment platform for tagoken
 
 ```
 $ docker-compose build
-$ docker-compose run backend bundle exec rails db:create db:migrate
+$ docker-compose run backend bundle exec rails db:drop db:create db:migrate db:seed
 $ docker-compose up
 ```
