@@ -62,5 +62,8 @@ module.exports = {
         'vuex',
       ]
     }
-  }
+  },
+  server: {
+    port: 13000, // デフォルト: 3000
+  },
 }
