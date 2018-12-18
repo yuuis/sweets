@@ -14,8 +14,18 @@ Sweets is payment platform for tagoken
 
 ## Docs
 
-| Name | Version | Note |
-|:-----------:|:------------:|:------------:|
-| [IF Spec](docs/interface.md) | v0.1.0 | - |
+| Name                         | Version | Note  |
+| :--------------------------: | :-----: | :---: |
+| [IF Spec](docs/interface.md) | v0.1.0  | -     |
 
 ## Development
+
+
+
+## Docker Builds
+
+```
+$ docker-compose build
+$ docker-compose run backend bundle exec rails db:drop db:create db:migrate db:seed
+$ docker-compose up
+```
