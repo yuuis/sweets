@@ -14,10 +14,11 @@ MASTER_END_POINT = 'http://HOST_NAME/api/v1/purchase'
 
 
 class Reader(threading.Thread):
-    def __init__(self):
+    def __init__(self, purchase_id):
         super(Reader, self).__init__()
         self.stop_event = threading.Event()
         self.master_end_point = MASTER_END_POINT
+        self.purchase_id = purchase_id
 
     def stop(self):
         self.stop_event.set()
@@ -58,7 +59,7 @@ def purchase():
             task.stop()
             del task
             time.sleep(0.5)
-        task = Reader()
+        task = Reader(request.data['purchase_id'])
         task.start()
         return make_response(jsonify({"message": "accepted"}), 201)
 
