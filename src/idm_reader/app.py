@@ -16,14 +16,18 @@ def purchase():
             task.stop()
             del task
             time.sleep(0.5)
-        task = Reader(request.data['body']['purchase_id'])
+        try:
+            data = request.data['body']['purchase_id']
+        except TypeError:
+            return make_response(jsonify({"message": "bad request format"}), 400)
+        task = Reader(data)
         task.start()
         return make_response(jsonify({"message": "accepted"}), 202)
 
 
 @api.errorhandler(404)
-def not_found():
-    return make_response(jsonify({'error': 'Not found'}), 404)
+def not_found(error):
+    return make_response(jsonify({'error': str(error)}), 404)
 
 
 if __name__ == '__main__':
