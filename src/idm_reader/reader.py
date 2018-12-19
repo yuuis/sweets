@@ -3,9 +3,10 @@ import nfc
 import json
 import requests
 import threading
+import os
 
 
-MASTER_END_POINT = 'http://HOST_NAME/api/v1/purchase'
+MASTER_END_POINT = os.environ['MASTER_HOST']
 
 
 class Reader(threading.Thread):
