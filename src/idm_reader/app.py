@@ -11,7 +11,7 @@ task = None
 @api.route('/api/v1/purchase', methods=['GET', 'POST'])
 def purchase():
     global task
-    if request.method == 'GET':
+    if request.method == 'POST':
         if task is not None:
             task.stop()
             del task
@@ -19,7 +19,7 @@ def purchase():
         try:
             data = request.data['body']['purchase_id']
         except TypeError:
-            return make_response(jsonify({"message": "bad request format"}), 400)
+            return make_response(jsonify({"message": "bad json format"}), 400)
         task = Reader(data)
         task.start()
         return make_response(jsonify({"message": "accepted"}), 202)
