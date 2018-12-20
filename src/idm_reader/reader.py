@@ -6,15 +6,22 @@ import threading
 import os
 
 
-MASTER_END_POINT = 'a'
+MASTER_END_POINT = 'http://0.0.0.0:3000/api/v1/purchases'
+ACCESS_TOKEN = 'Eh8yh0WSu7Rvosf5PEDL9Q'
+CLIENT_SECRET = '9KrcjBex7cNsy7bOoTkEAg'
+UID = 'idmreader@test.com'
+# デプロイまでに環境変数に入れましょうね
 
 
 class Reader(threading.Thread):
     def __init__(self, purchase_id):
         super(Reader, self).__init__()
         self.stop_event = threading.Event()
-        self.master_end_point = MASTER_END_POINT
         self.purchase_id = purchase_id
+        self.master_end_point = MASTER_END_POINT
+        self.access_token = ACCESS_TOKEN
+        self.client_secret = CLIENT_SECRET
+        self.uid = UID
 
     def stop(self):
         self.stop_event.set()
@@ -28,12 +35,12 @@ class Reader(threading.Thread):
             }
         }
         response = requests.post(
-            'http://0.0.0.0:3000/api/v1/purchases',
+            self.master_end_point,
             json.dumps(result),
             headers={'Content-Type': 'application/json',
-                     'access-token': 'Eh8yh0WSu7Rvosf5PEDL9Q',
-                     'client': '9KrcjBex7cNsy7bOoTkEAg',
-                     'uid': 'idmreader@test.com'}
+                     'access-token': self.access_token,
+                     'client': self.client_secret,
+                     'uid': self.uid}
         )
         print response.text
         return response
