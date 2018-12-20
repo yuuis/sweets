@@ -31,6 +31,11 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def show
+    purchase = Purchase.find(params[:id])
+    render json: purchase, status: :ok
+  end
+
   def fetch_api(url, data)
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
