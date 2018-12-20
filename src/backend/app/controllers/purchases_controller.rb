@@ -18,7 +18,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    print params
     purchase = Purchase.find(params[:body][:purchase_id])
     user = User.find(Idm.find_by(value: params[:body][:idm]).user_id)
     if purchase && user
