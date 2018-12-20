@@ -6,7 +6,7 @@ import threading
 import os
 
 
-MASTER_END_POINT = os.environ['MASTER_HOST']
+MASTER_END_POINT = 'a'
 
 
 class Reader(threading.Thread):
@@ -28,10 +28,14 @@ class Reader(threading.Thread):
             }
         }
         response = requests.post(
-            self.master_end_point,
+            'http://0.0.0.0:3000/api/v1/purchases',
             json.dumps(result),
-            headers={'Content-Type': 'application/json'}
+            headers={'Content-Type': 'application/json',
+                     'access-token': 'Eh8yh0WSu7Rvosf5PEDL9Q',
+                     'client': '9KrcjBex7cNsy7bOoTkEAg',
+                     'uid': 'idmreader@test.com'}
         )
+        print response.text
         return response
 
     def run(self, express=False):
@@ -49,6 +53,7 @@ class Reader(threading.Thread):
                 break
             target_res = clf.sense(target_req, iterations=10, interval=0.01)
             if target_res is not None:
+                print binascii.hexlify(target_res.sensf_res)
                 self.send_msg(binascii.hexlify(target_res.sensf_res), "success")
                 clf.close()
                 break
