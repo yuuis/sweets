@@ -2,10 +2,12 @@ version: '3'
 services:
     
     frontend:  
-        build: "./docker/vuejs"
+        build: 
+            context: ./src/frontend/
+            dockerfile: ../../docker/vuejs/Dockerfile
         ports:
             - 13000:13000
-        command: npm run dev
+        command: [sh, -c, npm install --verbose && npm run dev]
         volumes:
             - "./src/frontend:/app"
         stdin_open: true
