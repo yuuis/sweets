@@ -47,6 +47,9 @@ module.exports = {
     // Doc: https://bootstrap-vue.js.org/docs/
     '@nuxtjs/dotenv',
     'nuxt-onsenui-module',
+    ['nuxt-sass-resources-loader', [
+      '@/assets/sass/foundation/mixin.scss'
+    ]],
   ],
 
   /*
