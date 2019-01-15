@@ -14,7 +14,7 @@
       </el-col>
       <el-col :span="4"></el-col>
     </el-row>
-    <div class="products" v-if="!paymethod">
+    <div class="products" v-show="!paymethod">
       <el-row class="contents" v-for="item in items" :key="item.id">
         <el-col class="image" :span="7">
           <img :src="item.image_path" alt>
