@@ -20,6 +20,7 @@
     "node-sass": "^4.10.0",
     "nuxt": "^2.3.4",
     "nuxt-onsenui-module": "^1.0.0",
+    "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^7.1.0",
     "sweet-modal-vue": "^2.0.0",
     "vue-qriously": "^1.1.1"

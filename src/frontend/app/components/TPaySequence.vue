@@ -43,7 +43,12 @@ export default {
 
 <style lang="scss" scoped>
 .tutorial {
-  width: 100%;
+  @include pc {
+    width: 100%;
+  }
+  @include tab {
+    height: 80%;
+  }
   display: inline-block;
 }
 

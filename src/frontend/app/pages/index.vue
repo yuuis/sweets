@@ -42,6 +42,7 @@
         </el-row>
       </div>
     </div>
+    <div v-show="isShowSubtotal" style="height:80px;"></div>
   </v-ons-page>
 </template>
 
@@ -151,8 +152,11 @@ export default {
       if (!isExist) this.cart.push(product);
     },
     showTotal(bool) {
-      if (bool == undefined) bool = this.isShowSubtotal;
-      this.isShowTotal = bool;
+      if (bool == undefined) {
+        bool = this.isShowSubtotal;
+      } else {
+        this.isShowTotal = bool;
+      }
     },
     removeCart(id) {
       this.$refs.prod.some((item, index) => {
