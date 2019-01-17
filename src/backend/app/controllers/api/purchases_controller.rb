@@ -1,4 +1,4 @@
-class PurchasesController < ApplicationController
+class Api::PurchasesController < ApplicationController
   before_action :authenticate_user!
 
   def reserve
