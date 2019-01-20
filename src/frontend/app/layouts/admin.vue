@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import start from "~/pages/main/startup";
+import login from "~/pages/admin/login";
 export default {
   data() {
     return {
-      pageStack: [start]
+      pageStack: [login]
     };
   }
 };

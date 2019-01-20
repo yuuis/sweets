@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import index from "~/pages/index";
+import index from "~/pages/main/index";
 export default {
   methods: {
     start() {

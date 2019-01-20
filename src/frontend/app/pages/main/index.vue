@@ -49,10 +49,10 @@
 <script>
 import Products from "~/components/Products.vue";
 import TotalAccount from "~/components/TotalAccount.vue";
-import DonePage from "~/pages/done";
+import DonePage from "~/pages/main/done";
 
 export default {
-  asyncData() {
+  data() {
     return {
       products: [
         {

@@ -46,11 +46,16 @@ module.exports = {
   modules: [,
     // Doc: https://bootstrap-vue.js.org/docs/
     '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
     'nuxt-onsenui-module',
     ['nuxt-sass-resources-loader', [
       '@/assets/sass/foundation/mixin.scss'
     ]],
   ],
+
+  axios: {
+    baseURL: 'http://localhost:3000'
+  },
 
   /*
   ** Build configuration
