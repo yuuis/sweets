@@ -13,7 +13,7 @@
           <el-input type="password" v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="login(form)">Login</el-button>
+          <el-button type="primary" @click="preLogin(form)">Login</el-button>
         </el-form-item>
       </el-form>
     </v-ons-card>
@@ -22,10 +22,10 @@
 
 <script>
 import { mapActions } from "vuex";
-import Cookie from "js-cookie";
+import index from "~/pages/admin/index";
 
 export default {
-  middleware: "notAuthenticated",
+  middleware: ["notAuthenticated"],
   data() {
     return {
       form: {
@@ -60,10 +60,20 @@ export default {
         };
         this.$store.commit("update", auth); // クライアントレンダリング用
         Cookie.set("auth", auth);
-        this.$router.path("/admin");
+        this.$router.push("/admin");
       }, 1000);
     },
+    async preLogin(array) {
+      if (await this.login(array)) {
+        this.$emit("push-page", index);
+      } else {
+        this.$ons.notification.alert("Login Error");
+      }
+    },
     ...mapActions(["login"])
+  },
+  mounted() {
+    console.log(this.$store.state);
   },
   layout: "base"
 };

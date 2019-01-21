@@ -54,7 +54,8 @@ import DonePage from "~/pages/main/done";
 export default {
   data() {
     return {
-      products: [
+      products: [],
+      products1: [
         {
           id: 1,
           name: "カップ麺",
@@ -226,6 +227,25 @@ export default {
       });
       return price.toLocaleString();
     }
+  },
+  async created() {
+    await this.$axios({
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        ...this.$store.state.auth
+      },
+      url: "api/v1/products"
+    })
+      .then(response => {
+        console.log(response);
+
+        this.products = response.data;
+      })
+      .catch(err => {
+        this.$ons.notification.alert("Error: Cant load products list");
+      });
   }
 };
 </script>

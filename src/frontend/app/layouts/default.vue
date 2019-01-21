@@ -5,10 +5,14 @@
 <script>
 import start from "~/pages/main/startup";
 export default {
+  middleware: ["authenticated"],
   data() {
     return {
       pageStack: [start]
     };
+  },
+  mounted() {
+    console.log(this.$store.state.auth);
   }
 };
 </script>

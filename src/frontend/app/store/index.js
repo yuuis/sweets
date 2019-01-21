@@ -1,4 +1,5 @@
 import Vuex from 'vuex';
+import Cookie from "js-cookie";
 
 var cookieparser = require('cookieparser');
 
@@ -26,27 +27,21 @@ export default() => new Vuex.Store({
                         'email': 'ishiguro@example.com',
                         'password': '3lkh4jg0dfkj345hl23'
                     }
-                });
+                }).catch(err => {
+                    return false;
+                })
 
                 if (response.status == 200) {
-
-                    commit('update', {
+                    const auth = {
                         'access-token': response.headers['access-token'],
                         'uid': response.headers['uid'],
                         'client': response.headers['client']
-                    })
-                }
+                    };
 
-                console.log(response);
-            },
-
-            nuxtServerInit ({commit}, {req}) {
-                let accessToken = null;
-                if (req.headers.cookie) {
-                    var parsed = cookieparser.parse(req.headers.cookie);
-                    accessToken = JSON.parse(parsed.auth);
-                }
-                commit('update', accessToken);
+                    Cookie.set("auth", auth);
+                    commit('update', auth);
+                    return true;
+                } else return false;
             }
         }
     })

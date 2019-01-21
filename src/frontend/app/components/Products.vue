@@ -10,7 +10,7 @@
       <div style="padding: 14px;">
         <span>{{ product.name }}</span>
         <div class="bottom clearfix">
-          <time class="price">¥ {{ product.price }}</time>
+          <time class="price">&yen; {{ product.price }}</time>
         </div>
       </div>
     </div>
